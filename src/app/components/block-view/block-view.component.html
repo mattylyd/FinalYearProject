@@ -1,0 +1,23 @@
+
+<div class = "container">
+  <table class ="table">
+    <thead>
+    <tr>
+      <th>Hash</th>
+      <th>Data</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!--  <app-block-view-->
+    <!--    *ngFor = "let block of blocks"-->
+    <!--    [block]="block"-->
+    <!--  ></app-block-view>`-->
+    <tr *ngFor="let block of blocks">
+      <td>{{block.hash}}</td>
+      <td>{{block.data}}</td>
+    </tr>
+    </tbody>
+  </table>
+
+
+</div>

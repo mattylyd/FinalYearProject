@@ -1,0 +1,10 @@
+<div *ngIf = "blocks?.length > 0; else noItems" >
+  <ul *ngFor= "let item of blocks" class = "collection">
+    <li class="collection-item"> <strong>{{ item.index }}</strong> {{item.data}}</li>
+  </ul>
+</div>
+
+<ng-template #noItems>
+  <hr>
+  <h5>There are no items in list</h5>
+</ng-template>
