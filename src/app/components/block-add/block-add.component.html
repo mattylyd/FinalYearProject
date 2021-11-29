@@ -1,0 +1,23 @@
+
+<div class="container">
+  <form (ngSubmit)="onSubmit()" >
+    <div class="form-group">
+      <label>Index</label>
+      <input class="form-control" type ="text" placeholder="Add Index" [(ngModel)]="block.index" name="index" >
+
+    </div>
+    <div class="form-group">
+      <label>Data</label>
+      <input class="form-control" type ="text" placeholder="Add Data" [(ngModel)]="block.data" name="data" >
+
+    </div>
+    <div class="form-group">
+      <label>Timestamp</label>
+      <input class="form-control" type ="text" placeholder="Add Timestamp" [(ngModel)]="block.timestamp" name="timestamp" >
+
+
+    </div>
+    <input type="submit" value="submit" class="btn btn-primary mb-2">
+  </form>
+</div>
+
