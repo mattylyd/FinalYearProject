@@ -14,7 +14,8 @@ import {FormsModule} from "@angular/forms";
 import { ItemsComponent } from './components/items/items.component';
 import {ItemService} from "./services/item.service";
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { AddBlockComponent } from './components/add-block/add-block.component';
+
+import { BlockAddComponent } from './components/block-add/block-add.component';
 
 
 let routes:Routes = [{path: 'home', component:HomeComponent},
@@ -32,7 +33,7 @@ let routes:Routes = [{path: 'home', component:HomeComponent},
     ItemsComponent,
     ViewComponent,
     NavbarComponent,
-    AddBlockComponent
+    BlockAddComponent
   ],
     imports: [
         BrowserModule,

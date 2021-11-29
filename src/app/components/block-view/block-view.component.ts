@@ -1,16 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {BlockchainService} from "../../services/blockchain.service";
+import {blockTS} from "../../models/blockTS";
 @Component({
   selector: 'app-block-view',
   templateUrl: './block-view.component.html',
   styleUrls: ['./block-view.component.css']
 })
 export class BlockViewComponent implements OnInit {
-  public blocks  = [] as any;
+  public blocks:Array<blockTS>
 
   constructor( private blockchainService: BlockchainService) {
-    this.blocks = blockchainService.getBlocks();
+    blockchainService.getBlocks().subscribe(blocks=>{
+      this.blocks = blocks;
+
+    });
+
   }
   addNewBlock(form){
 
