@@ -4,7 +4,6 @@ import {RouterModule, Routes} from '@angular/router';
 import {environment} from "../environments/environment";
 import { AngularFireModule} from "@angular/fire/compat";
 import {AngularFirestore, AngularFirestoreModule} from "@angular/fire/compat/firestore";
-
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AboutComponent } from './pages/about/about.component';
@@ -15,8 +14,10 @@ import { ItemsComponent } from './components/items/items.component';
 import {ItemService} from "./services/item.service";
 import { NavbarComponent } from './components/navbar/navbar.component';
 
-import { BlockAddComponent } from './components/block-add/block-add.component';
 
+import { BlockAddComponent } from './components/block-add/block-add.component';
+import {NgxExtendedPdfViewerModule} from "ngx-extended-pdf-viewer";
+import { AngularFireStorageModule } from "@angular/fire/compat/storage";
 
 let routes:Routes = [{path: 'home', component:HomeComponent},
   {path: 'about', component:AboutComponent},
@@ -35,13 +36,16 @@ let routes:Routes = [{path: 'home', component:HomeComponent},
     NavbarComponent,
     BlockAddComponent
   ],
-    imports: [
-        BrowserModule,
-        RouterModule.forRoot(routes),
-        FormsModule,
-        AngularFireModule.initializeApp(environment.firebase),
-        AngularFirestoreModule
-    ],
+  imports: [
+    BrowserModule,
+    RouterModule.forRoot(routes),
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    NgxExtendedPdfViewerModule,
+    AngularFireStorageModule
+
+  ],
   providers: [ItemService],
   bootstrap: [AppComponent]
 })
