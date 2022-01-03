@@ -18,6 +18,12 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { BlockAddComponent } from './components/block-add/block-add.component';
 import {NgxExtendedPdfViewerModule} from "ngx-extended-pdf-viewer";
 import { AngularFireStorageModule } from "@angular/fire/compat/storage";
+import {AuthModule} from "./auth/auth.module";
+import { HotToastModule } from '@ngneat/hot-toast';
+import {AuthService} from "./services/auth.service";
+// import { LoginComponent } from './components/login/login.component';
+// import { RegisterComponent } from './components/register/register.component';
+// import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 let routes:Routes = [{path: 'home', component:HomeComponent},
   {path: 'about', component:AboutComponent},
@@ -43,10 +49,12 @@ let routes:Routes = [{path: 'home', component:HomeComponent},
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     NgxExtendedPdfViewerModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    AuthModule,
+    HotToastModule.forRoot()
 
   ],
-  providers: [ItemService],
+  providers: [ItemService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

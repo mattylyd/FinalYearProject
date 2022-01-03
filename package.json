@@ -19,6 +19,8 @@
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
+    "@ngneat/hot-toast": "^3.4.3",
+    "@ngneat/overview": "^2.0.2",
     "angularfire2": "^5.4.2",
     "crypto-js": "^4.1.1",
     "firebase": "^9.6.1",
