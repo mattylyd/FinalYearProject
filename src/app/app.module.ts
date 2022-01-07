@@ -18,16 +18,21 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { BlockAddComponent } from './components/block-add/block-add.component';
 import {NgxExtendedPdfViewerModule} from "ngx-extended-pdf-viewer";
 import { AngularFireStorageModule } from "@angular/fire/compat/storage";
-import {AuthModule} from "./auth/auth.module";
+
 import { HotToastModule } from '@ngneat/hot-toast';
 import {AuthService} from "./services/auth.service";
-// import { LoginComponent } from './components/login/login.component';
-// import { RegisterComponent } from './components/register/register.component';
-// import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import {LoginComponent} from "./pages/login/login.component";
+import {RegisterComponent} from "./pages/register/register.component";
+import {ResetPasswordComponent} from "./pages/reset-password/reset-password.component";
+import {NgLetModule} from "ng-let";
+
 
 let routes:Routes = [{path: 'home', component:HomeComponent},
   {path: 'about', component:AboutComponent},
-  {path: 'view', component:ViewComponent}
+  {path: 'view', component:ViewComponent},
+  {path: 'login', component:LoginComponent},
+  {path: 'register', component:RegisterComponent},
+  {path: 'reset-password', component:ResetPasswordComponent}
 ]
 
 @NgModule({
@@ -40,7 +45,10 @@ let routes:Routes = [{path: 'home', component:HomeComponent},
     ItemsComponent,
     ViewComponent,
     NavbarComponent,
-    BlockAddComponent
+    BlockAddComponent,
+    LoginComponent,
+    RegisterComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -50,11 +58,18 @@ let routes:Routes = [{path: 'home', component:HomeComponent},
     AngularFirestoreModule,
     NgxExtendedPdfViewerModule,
     AngularFireStorageModule,
-    AuthModule,
-    HotToastModule.forRoot()
+    HotToastModule.forRoot(),
+    NgLetModule
 
   ],
   providers: [ItemService, AuthService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  // test:any;
+  // constructor(private authService: AuthService) {
+  //   let test = authService.isAuthenticated;
+  //   console.log(JSON.stringify(test))
+  // }
+
+}
