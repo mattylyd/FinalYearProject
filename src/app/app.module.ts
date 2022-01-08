@@ -25,6 +25,7 @@ import {LoginComponent} from "./pages/login/login.component";
 import {RegisterComponent} from "./pages/register/register.component";
 import {ResetPasswordComponent} from "./pages/reset-password/reset-password.component";
 import {NgLetModule} from "ng-let";
+import { FilesComponent } from './pages/files/files.component';
 
 
 let routes:Routes = [{path: 'home', component:HomeComponent},
@@ -32,7 +33,8 @@ let routes:Routes = [{path: 'home', component:HomeComponent},
   {path: 'view', component:ViewComponent},
   {path: 'login', component:LoginComponent},
   {path: 'register', component:RegisterComponent},
-  {path: 'reset-password', component:ResetPasswordComponent}
+  {path: 'reset-password', component:ResetPasswordComponent},
+  {path: 'files', component:FilesComponent}
 ]
 
 @NgModule({
@@ -48,7 +50,8 @@ let routes:Routes = [{path: 'home', component:HomeComponent},
     BlockAddComponent,
     LoginComponent,
     RegisterComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    FilesComponent
   ],
   imports: [
     BrowserModule,

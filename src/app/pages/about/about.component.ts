@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 import { AngularFireStorage } from "@angular/fire/compat/storage";
 import {Observable} from "rxjs";
+import {fileService} from "../../services/file.service";
 ///import {getStorage} from "@angular/fire/storage";
 
 @Component({
@@ -13,9 +14,9 @@ export class AboutComponent implements OnInit {
 
     profileUrl: Observable<string | null>;
     newProfile: String;
-    constructor(private storage: AngularFireStorage) {
-    const ref = this.storage.ref('MattBlockTest.pdf');
-    this.profileUrl = ref.getDownloadURL();
+    constructor(private fs: fileService) {
+
+    this.profileUrl = this.fs.getFile("MattBlockTest.pdf");
     console.log(this.profileUrl)
     pdfDefaultOptions.assetsFolder = 'bleeding-edge';
 

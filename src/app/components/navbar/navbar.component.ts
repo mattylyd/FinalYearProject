@@ -10,10 +10,12 @@ import {HotToastService} from "@ngneat/hot-toast";
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  email:String
+  email:String = ""
   user:firebase.User
 
-  constructor(private authService: AuthService, private router:Router, private hotToast:HotToastService) { }
+  constructor(private authService: AuthService, private router:Router, private hotToast:HotToastService) {
+
+  }
 
   ngOnInit(): void {
     this.authService.authState.subscribe(user => {
@@ -42,5 +44,6 @@ export class NavbarComponent implements OnInit {
       this.email = "";
       //this.router.navigate(['/login'])
     });
+
   }
 }
