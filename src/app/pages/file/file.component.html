@@ -1,0 +1,9 @@
+
+
+
+<h1 *ngIf="fileURL == '' && errorCode != ''">{{errorCode}}</h1>
+
+
+<div *ngIf="fileURL != '' && errorCode == ''">
+  <ngx-extended-pdf-viewer [src]="fileURL " [useBrowserLocale]="true" height="80vh"></ngx-extended-pdf-viewer>
+</div>

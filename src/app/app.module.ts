@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import {RouterModule, Routes} from '@angular/router';
 import {environment} from "../environments/environment";
 import { AngularFireModule} from "@angular/fire/compat";
-import {AngularFirestore, AngularFirestoreModule} from "@angular/fire/compat/firestore";
+import { AngularFirestoreModule} from "@angular/fire/compat/firestore";
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AboutComponent } from './pages/about/about.component';
@@ -26,6 +26,7 @@ import {RegisterComponent} from "./pages/register/register.component";
 import {ResetPasswordComponent} from "./pages/reset-password/reset-password.component";
 import {NgLetModule} from "ng-let";
 import { FilesComponent } from './pages/files/files.component';
+import { FileComponent } from './pages/file/file.component';
 
 
 let routes:Routes = [{path: 'home', component:HomeComponent},
@@ -34,7 +35,8 @@ let routes:Routes = [{path: 'home', component:HomeComponent},
   {path: 'login', component:LoginComponent},
   {path: 'register', component:RegisterComponent},
   {path: 'reset-password', component:ResetPasswordComponent},
-  {path: 'files', component:FilesComponent}
+  {path: 'files', component:FilesComponent},
+   {path: "files/:id", component: FileComponent}
 ]
 
 @NgModule({
@@ -51,7 +53,8 @@ let routes:Routes = [{path: 'home', component:HomeComponent},
     LoginComponent,
     RegisterComponent,
     ResetPasswordComponent,
-    FilesComponent
+    FilesComponent,
+    FileComponent
   ],
   imports: [
     BrowserModule,

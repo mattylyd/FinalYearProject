@@ -3,6 +3,9 @@ import {fileService} from "../../services/file.service";
 import {blockTS} from "../../models/blockTS";
 import {userTS} from "../../models/userTS";
 import {ActivatedRoute} from "@angular/router";
+import {Observable} from "rxjs";
+import * as http from "http";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-files',
@@ -12,13 +15,13 @@ import {ActivatedRoute} from "@angular/router";
 export class FilesComponent implements OnInit {
 
   public files:Array<string>
+  public file:string
   public id: string;
 
-  constructor(private fs:fileService, private route: ActivatedRoute) {
-    this.route.queryParams.subscribe(params => {
-      this.id = params['user'];
-      console.log(this.id); // Print the parameter to the console.
-    });
+  constructor(private authS:AuthService, private fs:fileService, private route: ActivatedRoute) {
+   authS.authState.subscribe(user=>{
+      this.id = user.email
+    })
 
     console.log(this.id)
     fs.getFiles().subscribe(users=>{
@@ -27,6 +30,8 @@ export class FilesComponent implements OnInit {
         if (user.email == this.id){
           this.files = user.files;
         }
+
+
       }
 
 
@@ -35,7 +40,16 @@ export class FilesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fs.getFiles()
+    // this.fs.getFiles()
   }
+  //
+  // getFile(targetFile){
+  //   this.fs.getFile(targetFile).subscribe(file=>{
+  //     this.file = file;
+  //   })
+  //   console.log(this.file)
+  // }
+
+
 
 }

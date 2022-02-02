@@ -16,6 +16,8 @@ import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/compat
 export class fileService {
 
   profileUrl: Observable<string | null>;
+  ref:any
+  set:Boolean
   newProfile: String;
 
   fileCollection: AngularFirestoreCollection<userTS>;
@@ -23,6 +25,7 @@ export class fileService {
   files:Array<String>;
   constructor(private storage: AngularFireStorage, public afs: AngularFirestore) {
     pdfDefaultOptions.assetsFolder = 'bleeding-edge';
+    this.set = false;
 
 
 
@@ -31,10 +34,35 @@ export class fileService {
   }
 
   getFile(file:string): Observable<string> {
-    const ref = this.storage.ref(file);
-    this.profileUrl = ref.getDownloadURL();
+
+    this.profileUrl = this.storage.ref(file).getDownloadURL()
+
+    this.set = true
+
+
+
+
     return this.profileUrl
   }
+
+
+  async test(file: string): Promise<any> {
+    return await this.storage.ref(file).getDownloadURL().toPromise()
+      .then(doc => {
+        if (doc.exists) { // if document exists ...
+          console.log("Exists")
+        } else { // if document does not exist ...
+          console.log("No such Doc")
+          //throw new Error('No such document!'); // ... throw an Error.
+        }
+      })
+      .catch(error => {
+        console.log("Error Doc")
+        //throw new Error('Error: Getting document:'); // throw an Error
+      });
+  };
+
+
   getFiles(){
     this.fileCollection = this.afs.collection('users')
     this.filesO = this.fileCollection.snapshotChanges().map(changes => {

@@ -43,7 +43,7 @@ export class AuthService {
     //
     // })
 
-     return this.currentUser;
+     // return this.currentUser;
   }
 
   update(){
