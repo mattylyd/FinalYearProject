@@ -51,8 +51,6 @@ export class LoginComponent implements OnInit {
 
 
   onSubmit(){
-    console.log("hello")
-    console.log(JSON.stringify(this.loginForm));
 
     this.authService.login(this.loginForm.username, this.loginForm.password).pipe(
       this.hotToast.observe({
@@ -62,7 +60,8 @@ export class LoginComponent implements OnInit {
 
       })
     ).subscribe(() => {
-      this.router.navigate(['/login'])
+      this.router.navigate([''])
     });
+
   }
 }

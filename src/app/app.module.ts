@@ -29,7 +29,7 @@ import { FilesComponent } from './pages/files/files.component';
 import { FileComponent } from './pages/file/file.component';
 
 
-let routes:Routes = [{path: 'home', component:HomeComponent},
+let routes:Routes = [{path: '', component:HomeComponent},
   {path: 'about', component:AboutComponent},
   {path: 'view', component:ViewComponent},
   {path: 'login', component:LoginComponent},

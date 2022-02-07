@@ -1,0 +1,6 @@
+.jumbotron{
+  background-image: url("../../../assets/photos/blockStock.jpg");
+  background-size: cover;
+  height: 400px;
+  background-position: 0 50%;
+}

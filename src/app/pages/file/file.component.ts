@@ -33,7 +33,7 @@ export class FileComponent implements OnInit {
 
     this.fs.getFile(urlFile).pipe(
       this.hotToast.observe({
-        success:'Loaded file successfully',
+        success:'File loaded successfully',
         loading:'Loading file',
         error:'There was an error'
 

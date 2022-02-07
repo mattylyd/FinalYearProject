@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
-
-//import { getStorage } from "@angular/fire/compat/storage";
-import {getStorage} from "@angular/fire/storage";
-
 import { AngularFireStorage } from "@angular/fire/compat/storage";
 import {Observable} from "rxjs";
 import {pdfDefaultOptions} from "ngx-extended-pdf-viewer";
 import {userTS} from "../models/userTS";
 import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/compat/firestore";
+import {fileDataTS} from "../models/fileDataTS";
 
 
 @Injectable({
@@ -16,13 +13,15 @@ import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/compat
 export class fileService {
 
   profileUrl: Observable<string | null>;
-  ref:any
   set:Boolean
-  newProfile: String;
-
   fileCollection: AngularFirestoreCollection<userTS>;
   public filesO:Observable<userTS[]>;
   files:Array<String>;
+
+
+  fileData:Observable<fileDataTS[]>
+
+
   constructor(private storage: AngularFireStorage, public afs: AngularFirestore) {
     pdfDefaultOptions.assetsFolder = 'bleeding-edge';
     this.set = false;
@@ -31,9 +30,20 @@ export class fileService {
 
 
 
+
+
   }
 
+  getFileData(file:string) {
+     return this.afs.collection('files').doc(file.substring(0, file.length-4)).valueChanges()
+    // return this.afs.collection('files').get();
+
+  }
+
+
+
   getFile(file:string): Observable<string> {
+
 
     this.profileUrl = this.storage.ref(file).getDownloadURL()
 
@@ -46,32 +56,20 @@ export class fileService {
   }
 
 
-  async test(file: string): Promise<any> {
-    return await this.storage.ref(file).getDownloadURL().toPromise()
-      .then(doc => {
-        if (doc.exists) { // if document exists ...
-          console.log("Exists")
-        } else { // if document does not exist ...
-          console.log("No such Doc")
-          //throw new Error('No such document!'); // ... throw an Error.
-        }
-      })
-      .catch(error => {
-        console.log("Error Doc")
-        //throw new Error('Error: Getting document:'); // throw an Error
-      });
-  };
 
 
-  getFiles(){
-    this.fileCollection = this.afs.collection('users')
-    this.filesO = this.fileCollection.snapshotChanges().map(changes => {
-      return changes.map( a=> {
-        const data = a.payload.doc.data() as userTS
-        return data
-      })
-    });
-    return this.filesO
+
+  getFileList(user:string){
+
+    return this.afs.collection('users').doc(user).valueChanges()
+    //this.fileCollection = this.afs.collection('users')
+    // this.filesO = this.fileCollection.snapshotChanges().map(changes => {
+    //   return changes.map( a=> {
+    //     const data = a.payload.doc.data() as userTS
+    //     return data
+    //   })
+    // });
+    // return this.filesO
   }
 
   ngOnInit(): void {

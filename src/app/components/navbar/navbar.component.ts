@@ -20,12 +20,12 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.authService.authState.subscribe(user => {
       if (user){
-        console.log("yes")
+
         this.user = user;
         this.email = user.email
       }
       else{
-        console.log("no")
+
         this.user = null
       }
     })
@@ -42,8 +42,9 @@ export class NavbarComponent implements OnInit {
     ).subscribe(() => {
       this.user = null;
       this.email = "";
-      //this.router.navigate(['/login'])
+      this.router.navigate([''])
     });
+
 
   }
 }
