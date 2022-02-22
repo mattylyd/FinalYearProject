@@ -11,13 +11,13 @@ export class BlockViewComponent implements OnInit {
   public blocks:Array<blockTS>
 
   constructor( private blockchainService: BlockchainService) {
-    blockchainService.getBlocks().subscribe(blocks=>{
-      this.blocks = blocks;
 
-    });
 
   }
-  addNewBlock(form){
+  addNewBlock(form){    // blockchainService.getBlocks().subscribe(blocks=>{
+    //   this.blocks = blocks;
+    //
+    // });
 
 
     const formParsed = JSON.parse(JSON.stringify(form.value));

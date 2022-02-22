@@ -53,24 +53,7 @@ export class FilesComponent implements OnInit {
                   console.log(newFile)
                   this.fileData.push(newFile)
             }
-          //console.log(JSON.stringify(allFiles))
-          ////for(const userFile of this.userFiles) {
-          //console.log(files)
-          //console.log('y')
-          // for (let i = 0; i < allFiles.length+1; i++ ) {
-          //   // if (userFile == Object.keys(allFiles[0])[i]) {
-          //   //
-          //   //   let newFile: fileDataTS = {
-          //   //     name:userFile,
-          //   //     creator: allFiles[0][userFile].creator,
-          //   //     type: allFiles[0][userFile].type,
-          //   //     users: allFiles[0][userFile].users
-          //   //   }
-          //   //
-          //   //   this.fileData.push(newFile)
-          //   // }
-          // }
-          //   }
+
            })
         }
       });

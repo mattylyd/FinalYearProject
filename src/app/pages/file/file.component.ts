@@ -4,6 +4,10 @@ import {fileService} from "../../services/file.service";
 import {pdfDefaultOptions} from "ngx-extended-pdf-viewer";
 import {Router} from "@angular/router";
 import {HotToastService} from "@ngneat/hot-toast";
+import {BlockchainService} from "../../services/blockchain.service";
+import {blockTS} from "../../models/blockTS";
+import {fileDataTS} from "../../models/fileDataTS";
+import {first} from "rxjs/operators";
 
 @Component({
   selector: 'app-file',
@@ -14,24 +18,32 @@ export class FileComponent implements OnInit {
 
   fileURL: string;
   errorCode: string;
-  urlFile: String;
+  urlFile: string;
   set:Promise<Boolean>
   test:string
+  public blocks: blockTS[]
 
 
-  constructor(private fs: fileService, private router: Router, private hotToast:HotToastService) {
+  constructor(private fs: fileService, private router: Router, private hotToast:HotToastService, private bc:BlockchainService) {
+
+
+    // this.fs.addAction("view", urlFile.substring(0, urlFile.length-4));
+
+
+
+  }
+
+  ngOnInit(): void {
+
 
     this.fileURL = ""
     this.errorCode= ""
 
 
-    let urlFile = router.url.split("/")[2]
+    this.urlFile = this.router.url.split("/")[2]
 
 
-
-
-
-    this.fs.getFile(urlFile).pipe(
+    this.fs.getFile(this.urlFile).pipe(
       this.hotToast.observe({
         success:'File loaded successfully',
         loading:'Loading file',
@@ -40,13 +52,52 @@ export class FileComponent implements OnInit {
       }))
       .subscribe(
         data => this.fileURL=data,
-         err => this.errorCode = err,
+        err => this.errorCode = err,
       );
 
+    console.log(this.urlFile)
+
+    this.bc.addNewBlock(this.urlFile.substring(0, this.urlFile.length-4), "view", "Matt")
+
+    this.bc.getBlocks(this.urlFile.substring(0, this.urlFile.length-4)).pipe(first()).subscribe(blockList=>{
+
+      this.blocks = [];
+
+      console.log("hello!!!!")
+      console.log(JSON.stringify(blockList[0].num));
+      console.log(JSON.stringify(blockList[4].num));
+
+
+      for (let i = 0; i < blockList.length; i++) {
+        console.log(blockList[i].hash);
+        let newBlock: blockTS = {
+          num : blockList[i].num,
+          date : blockList[i].date,
+          action : blockList[i].action,
+          user : blockList[i].user,
+          hash : blockList[i].hash,
+          prevhash : blockList[i].prevhash,
+
+        }
+        console.log(newBlock)
+        this.blocks.push(newBlock)
+      }
+
+      // for (const block in blockList ){
+      //   console.log((block.hash));
+      // }
+
+
+      // for (const file of fileList['files']) {
+      //   console.log(JSON.stringify(file.substring(0, file.length-4)))
+      //
+      // }
+    });
+
+
+
 
   }
 
-  ngOnInit(): void {
-  }
 
 }

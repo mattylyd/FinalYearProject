@@ -1,9 +1,41 @@
 
+<div class="container">
 
+  <div class="row">
+    <div class="col">
+      <h1 *ngIf="fileURL == '' && errorCode != ''">{{errorCode}}</h1>
+      <div *ngIf="fileURL != '' && errorCode == ''">
+        <ngx-extended-pdf-viewer [src]="fileURL " [useBrowserLocale]="true" height="80vh"></ngx-extended-pdf-viewer>
+      </div>
+    </div>
 
-<h1 *ngIf="fileURL == '' && errorCode != ''">{{errorCode}}</h1>
+  </div>
 
+  <div class ="row">
+    <div class = "col">
+      <div class="table-responsive" >
+        <table class="table ">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Action</th>
+            <th scope="col">User</th>
+            <th scope="col">Previous Hash</th>
+            <th scope="col">Hash</th>
+          </tr>
+          </thead>
+          <tbody >
+          <tr *ngFor="let block of blocks; ">
 
-<div *ngIf="fileURL != '' && errorCode == ''">
-  <ngx-extended-pdf-viewer [src]="fileURL " [useBrowserLocale]="true" height="80vh"></ngx-extended-pdf-viewer>
+            <th id="num" scope="row">{{block.num}}</th>
+            <td id="action" ><a>{{block.action}}</a></td>
+            <td id="user" >{{block.user}}</td>
+            <td id="prevhash" >{{block.prevhash}}</td>
+            <td id="hash" >{{block.hash}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+  </div>
+  </div>
 </div>

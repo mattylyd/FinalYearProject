@@ -1,0 +1,12 @@
+.table-responsive{
+  height: 400px;
+}
+
+td{
+  word-wrap: break-word;
+}
+
+#prevhash, #hash{
+  min-width: 200px;
+  max-width: 200px;
+}

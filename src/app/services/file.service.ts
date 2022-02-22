@@ -72,6 +72,14 @@ export class fileService {
     // return this.filesO
   }
 
+  addAction(action:string, file:string){
+
+    console.log(file)
+    this.afs.collection("blocks").doc(file).update({test: { action: action}});
+
+
+  }
+
   ngOnInit(): void {
   }
 
