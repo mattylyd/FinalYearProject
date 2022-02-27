@@ -25,6 +25,7 @@
     "crypto-js": "^4.1.1",
     "firebase": "^9.6.7",
     "ng-let": "^13.0.3",
+    "ng-multiselect-dropdown": "^0.3.8",
     "ngx-extended-pdf-viewer": "^11.0.0",
     "rxfire": "^6.0.3",
     "rxjs": "^6.6.7",

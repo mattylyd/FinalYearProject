@@ -1,0 +1,22 @@
+
+
+<div class="mb-3">
+
+  <form [formGroup]="myForm"  (ngSubmit)="onSubmit(selectedItems)" >
+    <label for="formFile" class="form-label">Default file input example</label>
+    <input class="form-control" type="file" id="formFile" formControlName="file">
+
+    <ng-multiselect-dropdown
+      [placeholder]="'Add Users'"
+      [settings]="dropdownSettings"
+      [data]="userList | async"
+      [(ngModel)]="selectedItems"
+      (onSelect)="onItemSelect($event)"
+      (onSelectAll)="onSelectAll($event)"
+      formControlName="users"
+      id="userDD">
+
+    </ng-multiselect-dropdown>
+    <button type="submit" class="btn btn-primary">Login <i class="fas fa-sign-in-alt"></i></button>
+  </form>
+</div>

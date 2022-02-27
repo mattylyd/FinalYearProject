@@ -9,7 +9,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { AboutComponent } from './pages/about/about.component';
 import { ViewComponent } from './pages/view/view.component';
 import { BlockViewComponent } from './components/block-view/block-view.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ItemsComponent } from './components/items/items.component';
 import {ItemService} from "./services/item.service";
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -27,6 +27,8 @@ import {ResetPasswordComponent} from "./pages/reset-password/reset-password.comp
 import {NgLetModule} from "ng-let";
 import { FilesComponent } from './pages/files/files.component';
 import { FileComponent } from './pages/file/file.component';
+import { UploadComponent } from './pages/upload/upload.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
 let routes:Routes = [{path: '', component:HomeComponent},
@@ -36,7 +38,8 @@ let routes:Routes = [{path: '', component:HomeComponent},
   {path: 'register', component:RegisterComponent},
   {path: 'reset-password', component:ResetPasswordComponent},
   {path: 'files', component:FilesComponent},
-   {path: "files/:id", component: FileComponent}
+  {path: 'files/upload', component:UploadComponent},
+  {path: "files/:id", component: FileComponent}
 ]
 
 @NgModule({
@@ -54,7 +57,8 @@ let routes:Routes = [{path: '', component:HomeComponent},
     RegisterComponent,
     ResetPasswordComponent,
     FilesComponent,
-    FileComponent
+    FileComponent,
+    UploadComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +69,9 @@ let routes:Routes = [{path: '', component:HomeComponent},
     NgxExtendedPdfViewerModule,
     AngularFireStorageModule,
     HotToastModule.forRoot(),
-    NgLetModule
+    NgLetModule,
+    NgMultiSelectDropDownModule.forRoot(),
+    ReactiveFormsModule
 
   ],
   providers: [ItemService, AuthService],

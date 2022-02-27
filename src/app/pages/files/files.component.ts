@@ -36,25 +36,28 @@ export class FilesComponent implements OnInit {
 
 
 
-
-        for (const file of fileList['files']) {
+        console.log(JSON.stringify(fileList['files'].length));
+        for (let i = 0; i<fileList['files'].length; i++) {
+          let file = fileList['files'][i]
+          console.log(i)
           console.log(JSON.stringify(file.substring(0, file.length-4)))
+          if (file != ""){
+            fs.getFileData(file).subscribe(fileData => {
+              console.log(JSON.stringify(fileData))
+              if (fileData) {
+                console.log("t")
+                let newFile: fileDataTS = {
+                  name: file.substring(0, file.length - 4),
+                  creator: fileData['creator'],
+                  type: fileData['type'],
+                  users: fileData['users'],
+                }
+                console.log(newFile)
+                this.fileData.push(newFile)
+              }
 
-          fs.getFileData(file).subscribe(fileData=>{
-            console.log(JSON.stringify(fileData))
-            if(fileData){
-              console.log("t")
-                  let newFile: fileDataTS = {
-                    name:file.substring(0, file.length-4),
-                    creator: fileData['creator'],
-                    type: fileData['type'],
-                    users: fileData['users'],
-                  }
-                  console.log(newFile)
-                  this.fileData.push(newFile)
-            }
-
-           })
+            })
+          }
         }
       });
    })

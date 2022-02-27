@@ -3,6 +3,7 @@ import {AngularFireAuth} from '@angular/fire/compat/auth'
 import {from, Observable} from "rxjs";
 import firebase from "firebase/compat";
 import { first } from 'rxjs/operators';
+import {AngularFirestore} from "@angular/fire/compat/firestore";
 
 
 @Injectable({
@@ -12,14 +13,11 @@ export class AuthService {
   authState: Observable<firebase.User>
   private currentUser: firebase.User;
 
-  constructor(public auth: AngularFireAuth) {
+  constructor(public auth: AngularFireAuth, public afs:AngularFirestore) {
   this.authState = auth.authState
 
   }
 
-  success() {
-    return "Successfull";
-  }
 
   login(username: string, password: string){
     return from(this.auth.signInWithEmailAndPassword(username, password));
@@ -29,21 +27,10 @@ export class AuthService {
   }
 
    getUser() {
-     return this.auth.authState.pipe(first()).toPromise();
-    // this.authState = this.auth.authState;
-    //   this.authState.subscribe(user => {
-    //   if (user) {
-    //     this.currentUser = user;
-    //     console.log('AUTHSTATE USER', user)
-    //     //console.log(user.email)
-    //   } else {
-    //     console.log('AUTHSTATE USER EMPTY', user)
-    //     this.currentUser = null;
-    //   }
-    //
-    // })
+     return sessionStorage.getItem('user') || undefined;
+    // return this.auth.user
+     // return this.auth.authState.pipe(first()).toPromise();
 
-     // return this.currentUser;
   }
 
   update(){
@@ -55,35 +42,37 @@ export class AuthService {
     return "ll"
   }
 
-  // get isAuthenticated(): boolean {
-  //   return this.auth.currentUser !== null;
-  // }
-  //
-  //
-  // get isEmailVerified(): boolean {
-  //   return this.isAuthenticated ? this.authState.emailVerified : false;
-  // }
-  //
-  //
-  // get currentUserId(): string {
-  //   return this.isAuthenticated ? this.authState.uid : null;
-  // }
+  register(email: string, password: string) {
+    return from(this.auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((result) => {
+        /* Call the SendVerificaitonMail() function when new user sign
+        up and returns promise */
+        // this.SendVerificationMail();
+        // this.SetUserData(result.user);
+      })
+      .catch((error) => {
+        window.alert(error.message);
+      }))
+  }
+  addUser(email: string){
+    this.afs.collection("users").doc(email).set({ files: [""]})
+      .catch((error) => {
+        window.alert(error.message);
+      })
+  }
 
+  checkUserExists(email: string){
+     return (this.auth.fetchSignInMethodsForEmail(email)
+      .then(function(signInMethods) {
+        if (signInMethods.length > 0) {
+        return true;
+        }
+        else{
+          return false;
+        }
+      }))
+  }
 
-  // get userData(): any {
-  //   if ( ! this.isAuthenticated ) {
-  //     return [];
-  //   }
-  //
-  //   return [
-  //     {
-  //       id: this.authState.uid,
-  //       displayName: this.authState.displayName,
-  //       email: this.authState.email,
-  //       phoneNumber: this.authState.phoneNumber,
-  //       photoURL: this.authState.photoURL,
-  //     }
-  //   ];
-  // }
 
 }

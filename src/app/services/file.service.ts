@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFireStorage } from "@angular/fire/compat/storage";
-import {Observable} from "rxjs";
+import {Observable, of} from "rxjs";
 import {pdfDefaultOptions} from "ngx-extended-pdf-viewer";
 import {userTS} from "../models/userTS";
 import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/compat/firestore";
 import {fileDataTS} from "../models/fileDataTS";
+import * as path from "path";
+import {catchError, take} from "rxjs/operators";
 
 
 @Injectable({
@@ -76,6 +78,24 @@ export class fileService {
 
     console.log(file)
     this.afs.collection("blocks").doc(file).update({test: { action: action}});
+
+
+  }
+  fileExists(file) {
+
+
+    return this.storage.ref(file).getDownloadURL().pipe(
+      take(1),
+      catchError(() => of("FNF"))
+    )
+
+      // console.log(t)
+
+
+
+
+  }
+  uploadFile(){
 
 
   }

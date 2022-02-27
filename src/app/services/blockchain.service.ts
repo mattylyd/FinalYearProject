@@ -65,12 +65,12 @@ export class BlockchainService {
     });
 
     this.blocks0sub = this.blocksO.pipe(first()).subscribe(lblist => {
-      console.log("last!!!!")
+      // console.log("last!!!!")
 
 
       let lbdata = lblist[0]
 
-      console.log(JSON.stringify(lbdata))
+      // console.log(JSON.stringify(lbdata))
 
 
       let recalHash = SHA256(lbdata.num.toString() + lbdata.date.toString()   + lbdata.action.toString()  + lbdata.user.toString()  + lbdata.prevhash.toString()).toString()
@@ -88,7 +88,7 @@ export class BlockchainService {
 
 
 
-      // this.afs.collection(file).doc().set({ num: (parseInt(lbdata.num.toString()) + 1).toString(), date: date.toString(), action: action.toString(), user: user.toString(), prevhash: lbdata.hash.toString(), hash: newHash });
+      this.afs.collection(file).doc().set({ num: (parseInt(lbdata.num.toString()) + 1).toString(), date: date.toString(), action: action.toString(), user: user.toString(), prevhash: lbdata.hash.toString(), hash: newHash });
 
 
 
@@ -96,7 +96,15 @@ export class BlockchainService {
 
 
   }
-  addNewBlock2(block: blockTS){
-    // return this.blockCollection.add(block);
+  createBlock(file, action, user){
+    let date = new Date()
+    let newHash = SHA256("0" + date.toString() + action.toString() + user.toString() + "").toString()
+    this.afs.collection(file).doc().set({ num: "0", date: date.toString(), action: action.toString(), user: user.toString(), prevhash: "", hash: newHash });
+
+  }
+
+
+  addNewBlock2(newblock){
+     return null;
   }
 }

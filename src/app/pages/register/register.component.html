@@ -1,30 +1,40 @@
 <div class="row">
   <div class="col-md-6 offset-md-3 mt-4">
-    <h3>Register New Employer</h3>
-    <form>
+    <h3>Register</h3>
+    <form  (ngSubmit)="onSubmit()" >
       <div class="form-group">
         <label for="registerUsername">Username</label>
         <input type="text"
                class="form-control"
                id="registerUsername"
-               placeholder="Enter username">
-      </div>
-      <div class="form-group">
-        <label for="registerEmail">Email</label>
-        <input type="email"
-               class="form-control"
-               id="registerEmail"
-               placeholder="Enter email">
+               placeholder="Enter username"
+               name="username"
+               [(ngModel)]="registerForm.username"
+        >
+
       </div>
       <div class="form-group">
         <label for="registerPassword">Password</label>
         <input type="password"
                class="form-control"
                id="registerPassword"
-               placeholder="Password">
+               placeholder="Password"
+               name="password"
+               [(ngModel)]="registerForm.password"
+        >
       </div>
-      <button type="submit"
-              class="btn btn-primary">Register <i class="fas fa-sign-in-alt"></i></button>
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password"
+               class="form-control"
+               id="confirmPassword"
+               placeholder="Confirm Password"
+               name="confirmpass"
+               [(ngModel)]="registerForm.confirmpass"
+        >
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="margin-top: 5px">Register<i class="fas fa-sign-in-alt"></i></button>
     </form>
   </div>
 </div>

@@ -30,8 +30,12 @@
       <form  *ngIf='email!=""' (ngSubmit)="onSubmit()">
         <button type="submit" class="btn btn-primary">Log Out <i class="fas fa-sign-in-alt"></i></button>
       </form>
+      <a *ngIf='email==""' href="/register" style="padding-right:5px;">
+        <button type="submit" class="btn btn-primary">Register<i class="fas fa-sign-in-alt"></i></button>
+      </a>
+
       <a *ngIf='email==""' href="/login">
-        <button type="submit" class="btn btn-primary">Log In <i class="fas fa-sign-in-alt"></i></button>
+        <button type="submit" class="btn btn-primary">Log In<i class="fas fa-sign-in-alt"></i></button>
       </a>
     </div>
   </div>
