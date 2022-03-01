@@ -41,7 +41,7 @@ export class BlockchainService {
 
   }
   getBlocks(file){
-    this.blockList = this.afs.collection(file, ref => ref.orderBy('date', 'desc')).valueChanges(blocks=>{
+    this.blockList = this.afs.collection("files").doc(file).collection("blocks", ref => ref.orderBy('date', 'desc')).valueChanges(blocks=>{
       return blocks.map(a => {
         const data = a.payload.doc.data() as blockTS;
         return data
@@ -57,7 +57,7 @@ export class BlockchainService {
   //index, timestamp, data, previousHash=''
   async addNewBlock(file, action, user) {
 
-    this.blocksO = await this.afs.collection(file, ref => ref.orderBy('date', 'desc').limit(1)).valueChanges(block=>{
+    this.blocksO = await this.afs.collection("files").doc(file).collection("blocks", ref => ref.orderBy('date', 'desc').limit(1)).valueChanges(block=>{
         return block.map(a => {
           const data = a.payload.doc.data() as blockTS;
           return data
@@ -88,7 +88,7 @@ export class BlockchainService {
 
 
 
-      this.afs.collection(file).doc().set({ num: (parseInt(lbdata.num.toString()) + 1).toString(), date: date.toString(), action: action.toString(), user: user.toString(), prevhash: lbdata.hash.toString(), hash: newHash });
+      this.afs.collection("files").doc(file).collection("blocks").doc().set({ num: (parseInt(lbdata.num.toString()) + 1).toString(), date: date.toString(), action: action.toString(), user: user.toString(), prevhash: lbdata.hash.toString(), hash: newHash });
 
 
 
@@ -99,7 +99,7 @@ export class BlockchainService {
   createBlock(file, action, user){
     let date = new Date()
     let newHash = SHA256("0" + date.toString() + action.toString() + user.toString() + "").toString()
-    this.afs.collection(file).doc().set({ num: "0", date: date.toString(), action: action.toString(), user: user.toString(), prevhash: "", hash: newHash });
+    this.afs.collection("files").doc(file).collection("blocks").doc().set({ num: "0", date: date.toString(), action: action.toString(), user: user.toString(), prevhash: "", hash: newHash });
 
   }
 

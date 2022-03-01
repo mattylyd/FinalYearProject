@@ -146,7 +146,7 @@ export class UploadComponent implements OnInit {
 
         }
 
-        this.afs.collection("files").doc(fileUpload.name.substring(0, fileUpload.name.length - 4)).set({
+        this.afs.collection("files").doc(fileUpload.name.substring(0, fileUpload.name.length - 4)).collection("info").doc("values").set({
           creator: user.email,
           type: "pdf",
           users: selectedUsers

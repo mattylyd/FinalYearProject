@@ -37,7 +37,7 @@ export class fileService {
   }
 
   getFileData(file:string) {
-     return this.afs.collection('files').doc(file.substring(0, file.length-4)).valueChanges()
+     return this.afs.collection('files').doc(file.substring(0, file.length-4)).collection("info").doc("values").valueChanges()
     // return this.afs.collection('files').get();
 
   }
